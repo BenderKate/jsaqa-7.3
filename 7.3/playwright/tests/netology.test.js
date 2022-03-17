@@ -1,9 +1,9 @@
-const { expect } = require("@playwright/test");
+const { expect, default: test } = require("@playwright/test");
 const { chromium } = require("playwright");
 const { email, password } = require("../user.js");
 const { wrongEmail, wrongPassword } = require("../user.js");
 
-(async () => {
+test("Should log in with valid user", async () => {
   const browser = await chromium.launch({
     headless: false,
     slowMo: 2000,
@@ -20,9 +20,9 @@ const { wrongEmail, wrongPassword } = require("../user.js");
 
   await page.close();
   await browser.close();
-})();
+});
 
-(async () => {
+test("Should not log in with invalid user", async () => {
   const browser = await chromium.launch({
     headless: false,
     slowMo: 2000,
@@ -38,4 +38,4 @@ const { wrongEmail, wrongPassword } = require("../user.js");
 
   await page.close();
   await browser.close();
-})();
+});
